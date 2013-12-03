@@ -96,9 +96,10 @@ public class CollectionOps {
         return mkString(iterable, "");
     }
 
-    public static <V> String mkString(Iterable<V> iterable, String seperator){
+    public static <V> String mkString(Iterable<V> iterable,String start, String seperator, String end){
         boolean first = true;
         StringBuilder sb = new StringBuilder();
+        sb.append(start);
         for (V v : iterable) {
             if(first) {
                 sb.append(v.toString());
@@ -108,7 +109,11 @@ public class CollectionOps {
                 sb.append(v);
             }
         }
+        sb.append(end);
         return sb.toString();
+    }
+    public static <V> String mkString(Iterable<V> iterable, String seperator){
+        return mkString(iterable, "",seperator,"");
     }
 
     public static <K, V> Map<K, Collection<V>> groupBy(Iterable<V> iterable, Function<V, K> grouper) {
